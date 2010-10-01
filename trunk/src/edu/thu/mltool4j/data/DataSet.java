@@ -4,40 +4,40 @@ import java.util.ArrayList;
 
 public class DataSet
 {
-	private ArrayList<DataItem> items;
+	private ArrayList<Data> datas;
 
 	public DataSet()
 	{
-		items = new ArrayList<DataItem>();
+		this.datas = new ArrayList<Data>();
 	}
 
-	public DataSet(ArrayList<DataItem> initItems)
+	public DataSet(ArrayList<Data> initDatas)
 	{
-		this.items = initItems;
+		this.datas = initDatas;
 	}
 
-	public boolean addItem(DataItem item)
+	public boolean add(Data data)
 	{
-		return items.add(item);
+		return datas.add(data);
 	}
 
-	public DataItem getItem(String dataItemId)
+	public Data getData(String dataId)
 	{
-		for (DataItem item : items)
+		for (Data data : datas)
 		{
-			if (item.getID().equals(dataItemId))
-				return item;
+			if (data.getID().equals(dataId))
+				return data;
 		}
 		return null;
 	}
 
-	public DataItem getItemAt(int index)
+	public Data getAt(int index)
 	{
-		return items.get(index);
+		return datas.get(index);
 	}
 
-	public ArrayList<DataItem> getAllDataItem()
+	public ArrayList<Data> getAllData()
 	{
-		return items;
+		return datas;
 	}
 }
