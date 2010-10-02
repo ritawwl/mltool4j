@@ -43,36 +43,19 @@ public class Data
 	{
 		return features.get(position);
 	}
-	
+
 	public ArrayList<Feature> getAllFeature()
 	{
 		return features;
 	}
 
-	/**
-	 * Get dim of feature at the specified position.
-	 * 
-	 * @param position
-	 * @return dim of feature at the specified position.
-	 */
-	public int getDimAt(int position)
-	{
-		return features.get(position).dim;
-	}
-
-	/**
-	 * Get value of feature at the specified position.
-	 * 
-	 * @param position
-	 * @return value of feature at the specified position.
-	 */
-	public double getValueAt(int position)
-	{
-		return features.get(position).value;
-	}
-
 	public String getID()
 	{
 		return this.id;
+	}
+
+	public int size()
+	{
+		return this.size;
 	}
 }
