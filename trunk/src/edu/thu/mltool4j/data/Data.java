@@ -43,6 +43,11 @@ public class Data
 	{
 		return features.get(position);
 	}
+	
+	public ArrayList<Feature> getAllFeature()
+	{
+		return features;
+	}
 
 	/**
 	 * Get dim of feature at the specified position.
