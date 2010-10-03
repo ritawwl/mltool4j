@@ -1,13 +1,16 @@
 package edu.thu.mltool4j.data;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import edu.thu.mltool4j.utils.ErrorReport;
 
 public class Data
 {
 	/**
 	 * Data identifier
 	 */
-	private String id;
+	private int id = -1;
 
 	/**
 	 * features array
@@ -15,9 +18,32 @@ public class Data
 	private ArrayList<Feature> features = null;
 
 	/**
+	 * class label of this data
+	 */
+	private int label = Integer.MIN_VALUE;
+
+	/**
 	 * Total element number
 	 */
-	private int size;
+	private int size = -1;
+
+	/**
+	 * Create a Data object from string line. The line format is same as that
+	 * used in svmlight and libsvm, for example: "-1 1:0.43 3:0.12 9284:0.2"
+	 * Please be care that the index is start from 1, and no comment part is
+	 * included.
+	 * 
+	 * @param initID
+	 *            the data id
+	 * @param line
+	 *            the data line in svmlight and libsvm format
+	 */
+	public Data(int initID, String line)
+	{
+		this.id = initID;
+		this.features = readData(line);
+		this.size = this.features.size();
+	}
 
 	/**
 	 * Create a Data object from string line. The line format is same as that
@@ -28,9 +54,38 @@ public class Data
 	 * @param line
 	 *            the data line in svmlight and libsvm format
 	 */
-	public Data(String line)
+	private ArrayList<Feature> readData(String line)
 	{
-		
+		StringTokenizer stk = new StringTokenizer(line);
+
+		try
+		{
+			// get label
+			this.label = Integer.parseInt(stk.nextToken());
+
+			// get features
+			ArrayList<Feature> fs = new ArrayList<Feature>();
+			while (stk.hasMoreTokens())
+			{
+				String pair[] = stk.nextToken().split(":");
+				int dim = Integer.parseInt(pair[0]);
+				double value = Double.parseDouble(pair[1]);
+
+				fs.add(new Feature(dim, value));
+			}
+
+			return fs;
+		}
+		catch (NumberFormatException nfe)
+		{
+			ErrorReport.showMessage(this, "readData");
+			return null;
+		}
+	}
+
+	public int getID()
+	{
+		return this.id;
 	}
 
 	/**
@@ -44,14 +99,14 @@ public class Data
 		return features.get(position);
 	}
 
+	public int getLabel()
+	{
+		return this.label;
+	}
+
 	public ArrayList<Feature> getAllFeature()
 	{
 		return features;
-	}
-
-	public String getID()
-	{
-		return this.id;
 	}
 
 	public int size()
