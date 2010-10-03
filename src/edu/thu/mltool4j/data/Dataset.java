@@ -76,7 +76,7 @@ public class Dataset
 	 * @param index
 	 * @return
 	 */
-	public Data getAt(int index)
+	public Data getDataAt(int index)
 	{
 		return datas.get(index);
 	}
@@ -96,7 +96,7 @@ public class Dataset
 	 * 
 	 * @return
 	 */
-	public int getDataNum()
+	public int size()
 	{
 		return this.dataNum;
 	}
