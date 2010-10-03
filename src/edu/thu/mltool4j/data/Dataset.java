@@ -38,9 +38,9 @@ public class Dataset
 		try
 		{
 			List<String> datalines = FileUtils.readLines(datafile);
-			for (String dataline : datalines)
+			for (int i = 0; i < datalines.size(); i++)
 			{
-				datas.add(new Data(dataline));
+				datas.add(new Data(i, datalines.get(i)));
 			}
 			refreshStatistics();
 		}
