@@ -12,15 +12,27 @@ public class ProbabilisticLSA
 {
 	private Dataset dataset = null;
 	private Posting[][] invertedIndex = null;
-	private int M = -1;
-	private int V = -1;
-	private int K = -1;
+	private int M = -1; // number of data
+	private int V = -1; // number of words
+	private int K = -1; // number of topics
 
 	public ProbabilisticLSA()
 	{
 
 	}
 
+	/**
+	 * The main function to do PLSA in specific dataset with user defined number
+	 * of topics and iterations
+	 * 
+	 * @param datafileName
+	 *            specific dataset file name
+	 * @param ntopics
+	 *            number of topics
+	 * @param iters
+	 *            number of iterations
+	 * @return success or not
+	 */
 	public boolean doPLSA(String datafileName, int ntopics, int iters)
 	{
 		File datafile = new File(datafileName);
@@ -54,12 +66,12 @@ public class ProbabilisticLSA
 
 	/**
 	 * Build the inverted index for M-step fast calculation. Format:
-	 * invertedIndex[w][]: a unsorted list of document which word w occurs.
+	 * invertedIndex[w][]: a unsorted list of document and position which word w
+	 * occurs.
 	 * 
 	 * @param ds
 	 *            the dataset which to be analysis
 	 */
-	@SuppressWarnings("unchecked")
 	private boolean buildInvertedIndex(Dataset ds)
 	{
 		ArrayList<Posting>[] list = new ArrayList[this.V];
@@ -77,9 +89,9 @@ public class ProbabilisticLSA
 
 		// convert to array
 		this.invertedIndex = new Posting[this.V][];
-		for (int m = 0; m < this.M; m++)
+		for (int w = 0; w < this.V; w++)
 		{
-			this.invertedIndex[m] = list[m].toArray(new Posting[0]);
+			this.invertedIndex[w] = list[w].toArray(new Posting[0]);
 		}
 
 		return true;
