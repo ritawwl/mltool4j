@@ -28,15 +28,17 @@ public class Data
 	private int size = -1;
 
 	/**
-	 * Create a Data object from string line. The line format is same as that
-	 * used in svmlight and libsvm, for example: "-1 1:0.43 3:0.12 9284:0.2"
-	 * Please be care that the index is start from 1, and no comment part is
-	 * included.
+	 * Create a Data object from string data line. The data line is in svmlight
+	 * and libsvm format but with feature index starts from 0. For example:
+	 * "-1 0:0.43 1:0.12 9284:0.2". please be care that the index here starts
+	 * from 0 rather than 1 which used in svmlight and libsvm, and no comment
+	 * part is included.
 	 * 
 	 * @param initID
 	 *            the data id
 	 * @param line
-	 *            the data line in svmlight and libsvm format
+	 *            the data line in svmlight and libsvm format with feature index
+	 *            starts from 0
 	 */
 	public Data(int initID, String line)
 	{
@@ -45,15 +47,6 @@ public class Data
 		this.size = this.features.size();
 	}
 
-	/**
-	 * Create a Data object from string line. The line format is same as that
-	 * used in svmlight and libsvm, for example: "-1 1:0.43 3:0.12 9284:0.2"
-	 * Please be care that the index is start from 1, and no comment part is
-	 * included.
-	 * 
-	 * @param line
-	 *            the data line in svmlight and libsvm format
-	 */
 	private ArrayList<Feature> readData(String line)
 	{
 		StringTokenizer stk = new StringTokenizer(line);
