@@ -238,8 +238,7 @@ public class ProbabilisticLSA
 					int m = posting.docID;
 					int position = posting.pos;
 
-					int n = (int) this.dataset.getDataAt(m).getFeatureAt(
-							position).value;
+					double n = this.dataset.getDataAt(m).getFeatureAt(position).weight;
 
 					sum += n * Pz_dw[z][m][position];
 				}
@@ -266,8 +265,7 @@ public class ProbabilisticLSA
 				Data d = this.dataset.getDataAt(m);
 				for (int position = 0; position < d.size(); position++)
 				{
-					Feature f = d.getFeatureAt(position);
-					int n = (int) f.value;
+					double n = d.getFeatureAt(position).weight;
 
 					sum += n * Pz_dw[z][m][position];
 				}
@@ -317,7 +315,7 @@ public class ProbabilisticLSA
 			{
 				Feature f = d.getFeatureAt(position);
 				int w = f.dim;
-				int n = (int) f.value;
+				double n = f.weight;
 
 				double sum = 0.0;
 				for (int z = 0; z < this.K; z++)
