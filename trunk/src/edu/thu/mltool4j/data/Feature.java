@@ -3,11 +3,11 @@ package edu.thu.mltool4j.data;
 public class Feature
 {
 	public int dim; // starts from 0
-	public double value;
+	public double weight;
 
-	public Feature(int initDim, double initValue)
+	public Feature(int initDim, double initWeight)
 	{
 		dim = initDim;
-		value = initValue;
+		weight = initWeight;
 	}
 }
